@@ -9,6 +9,8 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     body {
+      <div id="hud-content"></div>
+
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: radial-gradient(circle at center, #1a1a2f 0%, #0b0b1a 100%);
@@ -104,6 +106,48 @@
   </footer>
   <script>
     lucide.createIcons();
+  </script>
+  <script>
+  fetch('hud_config.json')
+    .then(response => response.json())
+    .then(config => {
+      const content = document.getElementById("hud-content");
+      config.modules.forEach(module => {
+        const section = document.createElement("section");
+
+        const heading = document.createElement("h2");
+        heading.textContent = `${module.icon} ${module.name}`;
+        section.appendChild(heading);
+
+        // Render links
+        if (module.links) {
+          module.links.forEach(link => {
+            const a = document.createElement("a");
+            a.href = link.url;
+            a.textContent = `${link.label} →`;
+            a.target = "_blank";
+            section.appendChild(a);
+          });
+        }
+
+        // Render actions
+        if (module.actions) {
+          module.actions.forEach(action => {
+            const btn = document.createElement("button");
+            btn.textContent = `${action.label}`;
+            btn.onclick = () => alert(`Executing: ${action.code}`);
+            section.appendChild(btn);
+          });
+        }
+
+        content.appendChild(section);
+      });
+
+      // Apply theme
+      document.body.style.background = config.theme.background;
+      document.body.style.color = config.theme.textColor;
+      document.body.style.fontFamily = config.theme.font;
+    });
   </script>
 </body>
 </html>
