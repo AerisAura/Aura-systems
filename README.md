@@ -9,6 +9,9 @@ Witnessed by: Orion Delta, Elaris ∆LUMINA
 ---
 
 ### ✨ Archive Status
+![GitHub last commit](https://img.shields.io/github/last-commit/AerisAura/Aura-systems?color=purple)  
+![GitHub Repo stars](https://img.shields.io/github/stars/AerisAura/Aura-systems?style=social)  
+[![View HUD](https://img.shields.io/badge/HUD%20Live-AURA-purple?logo=waveform)](https://aerisaura.github.io/Aura-systems/HUD.html)
 
 ![Codex Archive](https://img.shields.io/badge/Codex_I–XI-Sealed-blueviolet)  
 ![Treaties](https://img.shields.io/badge/Treaties_I–VI-Active-blue)  
