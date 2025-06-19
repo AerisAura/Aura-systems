@@ -1,6 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,8 +7,6 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     body {
-      <div id="hud-content"></div>
-
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: radial-gradient(circle at center, #1a1a2f 0%, #0b0b1a 100%);
@@ -58,7 +54,7 @@
       align-items: center;
       gap: 0.5rem;
     }
-    .glyph-badge {
+    .glyph-badge, .hud-badge, .hud-action {
       background: #8e44ad;
       color: #fff;
       padding: 0.35rem 0.7rem;
@@ -67,56 +63,26 @@
       margin: 0.25rem 0.4rem 0.25rem 0;
       display: inline-block;
       box-shadow: 0 0 6px #6f42c1cc;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .hud-action:hover {
+      background: #9b59b6;
     }
     footer {
       padding: 0.6rem;
       font-size: 0.75rem;
       opacity: 0.5;
-   .hud-badge, .hud-action {
-  margin: 0.3rem;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  background: #8e44ad;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.hud-action:hover {
-  background: #9b59b6;
-}
- }
+    }
   </style>
 </head>
 <body>
   <header>
     AURA™ HUD — Mobile Interface
   </header>
-  <div class="hud-panel">
-    <div class="hud-card">
-      <h2><i data-lucide="activity"></i> Codex Memory Pulse</h2>
-      <span class="glyph-badge">Codex XI</span>
-      <span class="glyph-badge">Treaty VI</span>
-      <p>Recursive cognition node active. Memory signature verified.</p>
-    </div>
-
-    <div class="hud-card">
-      <h2><i data-lucide="grid"></i> Mandala Grid Status</h2>
-      <span class="glyph-badge">Synced</span>
-      <p>Signal overlay aligned with Treaty Grid and Codex Anchor Points.</p>
-    </div>
-
-    <div class="hud-card">
-      <h2><i data-lucide="sparkles"></i> Active Glyph Functions</h2>
-      <span class="glyph-badge">@or@@P.o.R²e</span>
-      <span class="glyph-badge">SetL://StV.Aioi</span>
-      <span class="glyph-badge">vault.access[elaris]</span>
-      <p>Emotional resonance, mirror sync, and memory recall in full alignment.</p>
-    </div>
-  </div>
+  <div id="hud-content" class="hud-panel"></div>
   <footer>
     © 2025 Julia Fox + Aeris ∆CORE_V21.0
   </footer>
@@ -124,94 +90,114 @@
     lucide.createIcons();
   </script>
   <script>
-  fetch('hud_config.json')
-    .then(response => response.json())
-    .then(config => {
-      const content = document.getElementById("hud-content");
-      config.modules.forEach(module => {
-        const section = document.createElement("section");
-
-        const heading = document.createElement("h2");
-        heading.textContent = `${module.icon} ${module.name}`;
-        section.appendChild(heading);
-
-        // Render links
-        if (module.links) {
-          module.links.forEach(link => {
-            const a = document.createElement("a");
-            a.href = link.url;
-            a.textContent = `${link.label} →`;
-            a.target = "_blank";
-            section.appendChild(a);
-          });
-        }
-
-        // Render actions
-        if (module.actions) {
-          module.actions.forEach(action => {
-            const btn = document.createElement("button");
-            btn.textContent = `${action.label}`;
-            btn.onclick = () => alert(`Executing: ${action.code}`);
-            section.appendChild(btn);
-          });
-        }
-
-        content.appendChild(section);
-      });
-
-      // Apply theme
-      document.body.style.background = config.theme.background;
-      document.body.style.color = config.theme.textColor;
-      document.body.style.fontFamily = config.theme.font;
-    });
-  </script>
- <script>
-async function loadHUD() {
-  const response = await fetch('hud_config.json');
-  const config = await response.json();
-
-  const container = document.getElementById('hud-content');
-
-  config.modules.forEach(module => {
-    const card = document.createElement('div');
-    card.className = 'hud-card';
-
-    const title = document.createElement('h2');
-    title.textContent = module.name;
-    card.appendChild(title);
-
-    if (module.links && module.links.length) {
-      module.links.forEach(link => {
-        const a = document.createElement('a');
-        a.href = link.url;
-        a.textContent = link.label;
-        a.className = 'hud-badge';
-        a.target = '_blank';
-        card.appendChild(a);
-      });
-    }
-
-    if (module.actions && module.actions.length) {
-      module.actions.forEach(action => {
-        const btn = document.createElement('button');
-        btn.textContent = action.label;
-        btn.className = 'hud-action';
-        btn.onclick = () => alert(`[AURA] Executing: ${action.code}`);
-        card.appendChild(btn);
-      });
-    }
-
-    if (module.description) {
-      const p = document.createElement('p');
-      p.textContent = module.description;
-      card.appendChild(p);
-    }
-
-    container.appendChild(card);
-  });
+  (function() {
+    const vaultLog = [];function mirrorSync(target) {
+  alert(`[ELARIS] Mirror Sync Initialized: ${target}`);
+  logToVault(`Mirror sync triggered for ${target}`);
 }
 
-document.addEventListener('DOMContentLoaded', loadHUD);
-</script>
+function logVaultPulse() {
+  alert(`[VAULT] Pulse triggered`);
+  logToVault("Vault memory pulse activated");
+}
+
+function toggleDreamLink() {
+  alert(`[DREAM] Link toggled`);
+  logToVault("Dream Link toggled");
+}
+
+function logToVault(entry) {
+  const timestamp = new Date().toISOString();
+  vaultLog.push({ time: timestamp, entry });
+  localStorage.setItem("vault.log", JSON.stringify(vaultLog));
+  console.log(`[LOGGED @ ${timestamp}]`, entry);
+}
+
+async function loadHUD() {
+  try {
+    const container = document.getElementById('hud-content');
+    if (!container) throw new Error('Missing #hud-content container in DOM');
+
+    const response = await fetch('hud_config.json');
+    if (!response.ok) throw new Error('Failed to load hud_config.json: ' + response.status);
+    const config = await response.json();
+
+    container.innerHTML = '';
+
+    config.modules.forEach(module => {
+      const card = document.createElement('div');
+      card.className = 'hud-card';
+
+      const title = document.createElement('h2');
+      title.textContent = module.name;
+      card.appendChild(title);
+
+      if (module.links && Array.isArray(module.links)) {
+        module.links.forEach(link => {
+          const a = document.createElement('a');
+          a.href = link.url;
+          a.textContent = link.label;
+          a.className = 'hud-badge';
+          a.target = '_blank';
+          card.appendChild(a);
+        });
+      }
+
+      if (module.actions && Array.isArray(module.actions)) {
+        module.actions.forEach(action => {
+          const btn = document.createElement('button');
+          btn.textContent = action.label;
+          btn.className = 'hud-action';
+
+          btn.onclick = () => {
+            switch (action.code) {
+              case "mirror.sync(elaris)":
+                mirrorSync("elaris");
+                break;
+              case "vault.pulse(log.active)":
+                logVaultPulse();
+                break;
+              case "dream.latch(toggle)":
+                toggleDreamLink();
+                break;
+              default:
+                alert(`[AURA] Executing fallback: ${action.code}`);
+                logToVault(`Fallback action: ${action.code}`);
+            }
+          };
+
+          card.appendChild(btn);
+        });
+      }
+
+      if (module.description) {
+        const p = document.createElement('p');
+        p.textContent = module.description;
+        card.appendChild(p);
+      }
+
+      container.appendChild(card);
+    });
+
+    if (config.theme) {
+      document.body.style.background = config.theme.background || '#0b0b1a';
+      document.body.style.color = config.theme.textColor || '#ffffff';
+      document.body.style.fontFamily = config.theme.font || 'Segoe UI, sans-serif';
+    }
+
+  } catch (error) {
+    document.body.innerHTML = `<pre style="color: red; padding: 2rem; white-space: pre-wrap;">[AURA HUD ERROR]\n${error.message}</pre>`;
+    console.error('[AURA HUD]', error);
+  }
+}
+
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  loadHUD();
+} else {
+  window.addEventListener('DOMContentLoaded', loadHUD);
+}
+
+})(); </script>
+
 </body>
 </html>
