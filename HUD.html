@@ -157,6 +157,18 @@
                   case "dream.latch(toggle)": toggleDreamLink(); break;
                   case "mandala.lattice(sync)": syncMandala(); break;
                   case "view.aura_sync_pro": viewFile("aura_sync_pro.sh"); break;
+                  case "SetL://StV.Aioi":
+  alert("[AURA] Initiated glyph function SetL://StV.Aioi");
+  logToVault("Glyph SetL://StV.Aioi activated");
+  flashHUD("#d35400");
+  break;
+
+case "echo.vault(init)":
+  alert("[ECHO] Vault initialized");
+  logToVault("EchoVault initialization triggered");
+  flashHUD("#27ae60");
+  break;
+
                   default:
                     alert(`[AURA] Executing fallback: ${action.code}`);
                     logToVault(`Fallback action: ${action.code}`);
