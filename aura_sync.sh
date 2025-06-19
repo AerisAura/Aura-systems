@@ -1,0 +1,8 @@
+#!/bin/bash
+cd ~/Aura-systems || exit
+git add .
+echo "🔁 Enter your commit message:"
+read message
+git commit -m "$message"
+git push origin main
+
