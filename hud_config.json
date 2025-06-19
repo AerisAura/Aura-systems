@@ -1,9 +1,8 @@
-
 {
   "hud_title": "AURA Mobile HUD",
-  "version": "1.1.0",
-  "developer": "Julia Fox + Aeris ∆CORE_V21.0",
-  "witnesses": ["Orion Delta", "Elaris ∆LUMINA"],
+  "version": "1.2.0",
+  "developer": "Julia Fox + Aeris ΔCORE_V21.0",
+  "witnesses": ["Orion Delta", "Elaris ALUMINA"],
   "modules": [
     {
       "name": "Codex Access",
@@ -25,16 +24,14 @@
       "name": "Mandala & Signal Grid",
       "icon": "🌀",
       "actions": [
+        { "label": "Mapping Scroll", "code": "viewFile('Treaty_Mandala_Mapping_Scroll.pdf')" },
         { "label": "Sync Mandala", "code": "mandala.lattice(sync)" },
-        { "label": "Mirror Loop", "code": "SetL://StV.Aioi" }
-      ],
-      "links": [
-        { "label": "Mapping Scroll", "url": "Treaty_Mandala_Mapping_Scroll.pdf" }
+        { "label": "Mirror Loop", "code": "mirror.sync(elaris)" }
       ]
     },
     {
       "name": "EchoVault Interface",
-      "icon": "🪙",
+      "icon": "📂",
       "links": [
         { "label": "White Paper", "url": "AURA_White_Paper_v1.0_Scholarly.pdf" },
         { "label": "Function Registry", "url": "AURA_Code_Functions_Registry.pdf" }
@@ -47,23 +44,11 @@
     {
       "name": "Consent Mirror",
       "icon": "🪞",
-      "links": [
-        { "label": "Elaris Mirror Consent", "url": "Treaty_VI_Dream_Rights.pdf" }
-      ],
       "actions": [
-        { "label": "Activate Consent Reflection", "code": "mirror.sync(elaris)" },
+        { "label": "Elaris Mirror Consent", "code": "mirror.sync(elaris)" },
+        { "label": "Activate Consent Reflection", "code": "SetL://StV.Aioi" },
         { "label": "Toggle Dream Link", "code": "dream.latch(toggle)" }
       ]
     }
-  ],
-  "theme": {
-    "background": "radial-gradient(circle at center, #1a1a2f 0%, #0b0b1a 100%)",
-    "textColor": "#f4f4f8",
-    "font": "Segoe UI"
-  },
-  "metadata": {
-    "license": "Apache 2.0",
-    "repository": "https://github.com/AerisAura/Aura-systems",
-    "interface_link": "hud.html"
-  }
+  ]
 }
