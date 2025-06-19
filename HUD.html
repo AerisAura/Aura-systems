@@ -201,12 +201,17 @@ case "echo.vault(init)":
     }
 
     function viewVaultLog() {
-      const data = localStorage.getItem("vault.log");
-      const logCard = document.createElement('div');
-      logCard.className = 'hud-card';
-      logCard.innerHTML = `<h2>📜 Vault Log Viewer</h2><pre style='white-space:pre-wrap'>${data || 'Vault is empty.'}</pre>`;
-      document.getElementById('hud-content').appendChild(logCard);
-    }
+  const data = localStorage.getItem("vault.log");
+
+  // 🧼 Remove previous log viewer(s)
+  document.querySelectorAll('.vault-log-card').forEach(el => el.remove());
+
+  const logCard = document.createElement('div');
+  logCard.className = 'hud-card vault-log-card';
+  logCard.innerHTML = `<h2>📜 Vault Log Viewer</h2><pre style='white-space:pre-wrap'>${data || 'Vault is empty.'}</pre>`;
+  document.getElementById('hud-content').appendChild(logCard);
+}
+
 
     async function viewFile(filename) {
       try {
