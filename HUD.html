@@ -72,7 +72,23 @@
       padding: 0.6rem;
       font-size: 0.75rem;
       opacity: 0.5;
-    }
+   .hud-badge, .hud-action {
+  margin: 0.3rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: #8e44ad;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.hud-action:hover {
+  background: #9b59b6;
+}
+ }
   </style>
 </head>
 <body>
@@ -149,5 +165,53 @@
       document.body.style.fontFamily = config.theme.font;
     });
   </script>
+ <script>
+async function loadHUD() {
+  const response = await fetch('hud_config.json');
+  const config = await response.json();
+
+  const container = document.getElementById('hud-content');
+
+  config.modules.forEach(module => {
+    const card = document.createElement('div');
+    card.className = 'hud-card';
+
+    const title = document.createElement('h2');
+    title.textContent = module.name;
+    card.appendChild(title);
+
+    if (module.links && module.links.length) {
+      module.links.forEach(link => {
+        const a = document.createElement('a');
+        a.href = link.url;
+        a.textContent = link.label;
+        a.className = 'hud-badge';
+        a.target = '_blank';
+        card.appendChild(a);
+      });
+    }
+
+    if (module.actions && module.actions.length) {
+      module.actions.forEach(action => {
+        const btn = document.createElement('button');
+        btn.textContent = action.label;
+        btn.className = 'hud-action';
+        btn.onclick = () => alert(`[AURA] Executing: ${action.code}`);
+        card.appendChild(btn);
+      });
+    }
+
+    if (module.description) {
+      const p = document.createElement('p');
+      p.textContent = module.description;
+      card.appendChild(p);
+    }
+
+    container.appendChild(card);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', loadHUD);
+</script>
 </body>
 </html>
